@@ -1,5 +1,5 @@
 import ChatContainer from "./ChatContainer";
-import PromptInput from "./PromptInput";
+import PromptInput from "./promptInput/PromptInput";
 
 const ChatLayout = () => {
   return (
