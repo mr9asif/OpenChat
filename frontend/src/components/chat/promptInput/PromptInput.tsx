@@ -1,15 +1,21 @@
 import { useState } from "react";
 
+import { useChat } from "@/hooks/useChat";
+
 import AutoResizeTextarea from "./AutoResizeTextArea";
 import SendButton from "./SendButton";
 
 const PromptInput = () => {
   const [prompt, setPrompt] = useState("");
 
-  const handleSubmit = () => {
-    if (!prompt.trim()) return;
+  const { sendMessage } = useChat();
 
-    console.log(prompt);
+  const handleSubmit = async () => {
+    const text = prompt.trim();
+
+    if (!text) return;
+
+    await sendMessage(text);
 
     setPrompt("");
   };
