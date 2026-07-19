@@ -1,5 +1,5 @@
+import SidebarFooter from "./footer/SidebarFooter";
 import SidebarContent from "./SidebarContent";
-import SidebarFooter from "./SidebarFooter";
 import SidebarHeader from "./SidebarHeader";
 
 const Sidebar = () => {
