@@ -16,8 +16,31 @@ export const messages: Message[] = [
   {
     id: "3",
     role: "assistant",
-    content:
-      "React Query is a library that helps you fetch, cache, and synchronize server data efficiently.",
+    content: `
+# React Query
+
+React Query helps you manage **server state**.
+
+## Features
+
+- Caching
+- Background Refetching
+- Pagination
+- Mutations
+
+\`\`\`tsx
+const { data } = useQuery({
+  queryKey: ["users"],
+  queryFn: fetchUsers,
+});
+\`\`\`
+
+| Feature | Supported |
+|---------|-----------|
+| Cache | ✅ |
+| Retry | ✅ |
+| Infinite Query | ✅ |
+`,
     createdAt: new Date(),
   },
 ];
