@@ -7,24 +7,24 @@ interface Props {
 
 const ConversationItem = ({ conversation }: Props) => {
   return (
-    <button
+    <div
       className="
-      group
-      flex
-      w-full
-      items-center
-      justify-between
-      rounded-lg
-      px-3
-      py-2
-      transition
-      hover:bg-accent
+        group
+        flex
+        cursor-pointer
+        items-center
+        justify-between
+        rounded-lg
+        px-3
+        py-2
+        transition-colors
+        hover:bg-accent
       "
     >
       <span className="truncate text-sm">{conversation.title}</span>
 
       <ConversationActions />
-    </button>
+    </div>
   );
 };
 

@@ -1,19 +1,30 @@
 import { MoreHorizontal } from "lucide-react";
 
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import ConversationMenu from "./ConversationMenu";
+
 const ConversationActions = () => {
   return (
-    <button
-      className="
-      opacity-0
-      transition-opacity
-      group-hover:opacity-100
-      rounded-md
-      p-1
-      hover:bg-muted
-      "
-    >
-      <MoreHorizontal className="h-4 w-4" />
-    </button>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        className="
+          opacity-0
+          transition-opacity
+          group-hover:opacity-100
+          rounded-md
+          p-1
+          hover:bg-accent
+        "
+      >
+        <MoreHorizontal className="h-4 w-4" />
+      </DropdownMenuTrigger>
+
+      <ConversationMenu />
+    </DropdownMenu>
   );
 };
 

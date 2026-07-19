@@ -1,18 +1,26 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../sidebar/Sidebar";
+
+import DesktopSidebar from "./DesktopSidebar";
+import MobileSidebar from "./MobileSidebar";
+import TopBar from "./TopBar";
 
 const AppLayout = () => {
-  return (
-    <div className="flex h-screen w-full bg-background text-foreground">
-      {/* Sidebar */}
-      <aside className="hidden md:flex w-72 border-r">
-        <Sidebar />
-      </aside>
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-      {/* Main */}
-      <main className="flex-1 overflow-hidden">
-        <Outlet />
-      </main>
+  return (
+    <div className="flex h-screen overflow-hidden bg-background">
+      <DesktopSidebar />
+
+      <MobileSidebar open={sidebarOpen} onOpenChange={setSidebarOpen} />
+
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <TopBar onMenuClick={() => setSidebarOpen(true)} />
+
+        <main className="flex-1 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

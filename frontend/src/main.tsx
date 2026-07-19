@@ -1,3 +1,4 @@
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AppRouter } from "./app/router/AppRouter.tsx";
@@ -5,6 +6,8 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AppRouter />
+    <TooltipProvider>
+      <AppRouter />
+    </TooltipProvider>
   </StrictMode>,
 );
