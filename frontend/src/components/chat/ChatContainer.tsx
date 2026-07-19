@@ -1,9 +1,11 @@
+import { messages } from "./data/message";
 import EmptyState from "./EmptyState";
+import MessageList from "./messages/MessageList";
 
 const ChatContainer = () => {
   return (
-    <main className="flex flex-1 items-center justify-center overflow-y-auto">
-      <EmptyState />
+    <main className="flex-1 overflow-y-auto">
+      {messages.length === 0 ? <EmptyState /> : <MessageList />}
     </main>
   );
 };
