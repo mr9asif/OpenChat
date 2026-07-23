@@ -1,8 +1,49 @@
 import bcrypt from "bcrypt";
+import { SignOptions } from "jsonwebtoken";
 import { prisma } from "../../../lib/prisma";
-import { IRegister } from "./auth.interface";
+import config from "../../config";
+import { jwtUtils } from "../../utils/jwt";
+import { ILogin, IRegister } from "./auth.interface";
+const login = async (payload: ILogin) => {
+  const { email, password } = payload;
 
-const login = () => {};
+  const existUser = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!existUser) {
+    throw new Error("User doesn't exist, please register first.");
+  }
+
+  const passMatch = bcrypt.compareSync(password, existUser.password);
+
+  if (!passMatch) {
+    throw new Error("Invalid Credential");
+  }
+
+  const JWTPayload = {
+    id: existUser.id,
+    name: existUser.name,
+    email: existUser.email,
+    avater: existUser.avatar,
+  };
+  const accessToken = jwtUtils.createToken(
+    JWTPayload,
+    config.jwt_access_secret,
+    config.jwt_access_expires_in as SignOptions,
+  );
+
+  const refreshToken = jwtUtils.createToken(
+    JWTPayload,
+    config.jwt_refresh_secret,
+    config.jwt_refresh_expires_in as SignOptions,
+  );
+
+  return {
+    accessToken,
+    refreshToken,
+  };
+};
 const register = async (payload: IRegister) => {
   const { name, email, password, avater } = payload;
 

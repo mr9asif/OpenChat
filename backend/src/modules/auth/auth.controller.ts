@@ -19,6 +19,34 @@ const register = catchAsync(
   },
 );
 
+const loginUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const payload = req.body;
+
+    const { accessToken, refreshToken } = await authService.login(payload);
+
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24, //1d
+    });
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24 * 7, //7d
+    });
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "user logged in sucessfully",
+      data: { accessToken, refreshToken },
+    });
+  },
+);
+
 export const authController = {
   register,
+  loginUser,
 };
