@@ -1,0 +1,10 @@
+enum Role {
+    USER
+    ADMIN
+}
+
+enum MessageRole {
+    ASSISTENT
+    USER
+    SYSTEM
+}

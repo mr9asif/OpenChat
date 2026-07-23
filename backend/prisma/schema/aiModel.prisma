@@ -1,0 +1,14 @@
+model AIModel {
+  id         String @id @default(cuid())
+  name       String
+  modelSlug  String
+  providerId String
+
+  priority Int
+  enabled  Boolean @default(true)
+
+  provider AIProvider @relation(fields: [providerId], references: [id])
+
+  messages Message[]
+  usages   Usage[]
+}
