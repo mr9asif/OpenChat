@@ -17,8 +17,8 @@
 
 import * as runtime from "@prisma/client/runtime/index-browser"
 
-export type * from '../models.js'
-export type * from './prismaNamespace.js'
+export type * from '../models'
+export type * from './prismaNamespace'
 
 export const Decimal = runtime.Decimal
 
@@ -77,11 +77,14 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const AIModelScalarFieldEnum = {
   id: 'id',
+  providerId: 'providerId',
   name: 'name',
   modelSlug: 'modelSlug',
-  providerId: 'providerId',
   priority: 'priority',
-  enabled: 'enabled'
+  isFree: 'isFree',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type AIModelScalarFieldEnum = (typeof AIModelScalarFieldEnum)[keyof typeof AIModelScalarFieldEnum]
@@ -91,9 +94,9 @@ export const AIProviderScalarFieldEnum = {
   id: 'id',
   name: 'name',
   baseUrl: 'baseUrl',
-  apiKey: 'apiKey',
-  enabled: 'enabled',
-  createdAt: 'createdAt'
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type AIProviderScalarFieldEnum = (typeof AIProviderScalarFieldEnum)[keyof typeof AIProviderScalarFieldEnum]

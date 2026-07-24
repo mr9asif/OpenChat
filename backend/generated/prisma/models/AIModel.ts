@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums"
+import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model AIModel
@@ -36,29 +36,38 @@ export type AIModelSumAggregateOutputType = {
 
 export type AIModelMinAggregateOutputType = {
   id: string | null
+  providerId: string | null
   name: string | null
   modelSlug: string | null
-  providerId: string | null
   priority: number | null
-  enabled: boolean | null
+  isFree: boolean | null
+  isActive: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AIModelMaxAggregateOutputType = {
   id: string | null
+  providerId: string | null
   name: string | null
   modelSlug: string | null
-  providerId: string | null
   priority: number | null
-  enabled: boolean | null
+  isFree: boolean | null
+  isActive: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AIModelCountAggregateOutputType = {
   id: number
+  providerId: number
   name: number
   modelSlug: number
-  providerId: number
   priority: number
-  enabled: number
+  isFree: number
+  isActive: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -73,29 +82,38 @@ export type AIModelSumAggregateInputType = {
 
 export type AIModelMinAggregateInputType = {
   id?: true
+  providerId?: true
   name?: true
   modelSlug?: true
-  providerId?: true
   priority?: true
-  enabled?: true
+  isFree?: true
+  isActive?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type AIModelMaxAggregateInputType = {
   id?: true
+  providerId?: true
   name?: true
   modelSlug?: true
-  providerId?: true
   priority?: true
-  enabled?: true
+  isFree?: true
+  isActive?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type AIModelCountAggregateInputType = {
   id?: true
+  providerId?: true
   name?: true
   modelSlug?: true
-  providerId?: true
   priority?: true
-  enabled?: true
+  isFree?: true
+  isActive?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -187,11 +205,14 @@ export type AIModelGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type AIModelGroupByOutputType = {
   id: string
+  providerId: string
   name: string
   modelSlug: string
-  providerId: string
   priority: number
-  enabled: boolean
+  isFree: boolean
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
   _count: AIModelCountAggregateOutputType | null
   _avg: AIModelAvgAggregateOutputType | null
   _sum: AIModelSumAggregateOutputType | null
@@ -219,11 +240,14 @@ export type AIModelWhereInput = {
   OR?: Prisma.AIModelWhereInput[]
   NOT?: Prisma.AIModelWhereInput | Prisma.AIModelWhereInput[]
   id?: Prisma.StringFilter<"AIModel"> | string
+  providerId?: Prisma.StringFilter<"AIModel"> | string
   name?: Prisma.StringFilter<"AIModel"> | string
   modelSlug?: Prisma.StringFilter<"AIModel"> | string
-  providerId?: Prisma.StringFilter<"AIModel"> | string
   priority?: Prisma.IntFilter<"AIModel"> | number
-  enabled?: Prisma.BoolFilter<"AIModel"> | boolean
+  isFree?: Prisma.BoolFilter<"AIModel"> | boolean
+  isActive?: Prisma.BoolFilter<"AIModel"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"AIModel"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AIModel"> | Date | string
   provider?: Prisma.XOR<Prisma.AIProviderScalarRelationFilter, Prisma.AIProviderWhereInput>
   messages?: Prisma.MessageListRelationFilter
   usages?: Prisma.UsageListRelationFilter
@@ -231,11 +255,14 @@ export type AIModelWhereInput = {
 
 export type AIModelOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  providerId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   modelSlug?: Prisma.SortOrder
-  providerId?: Prisma.SortOrder
   priority?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  isFree?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   provider?: Prisma.AIProviderOrderByWithRelationInput
   messages?: Prisma.MessageOrderByRelationAggregateInput
   usages?: Prisma.UsageOrderByRelationAggregateInput
@@ -246,11 +273,14 @@ export type AIModelWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.AIModelWhereInput | Prisma.AIModelWhereInput[]
   OR?: Prisma.AIModelWhereInput[]
   NOT?: Prisma.AIModelWhereInput | Prisma.AIModelWhereInput[]
+  providerId?: Prisma.StringFilter<"AIModel"> | string
   name?: Prisma.StringFilter<"AIModel"> | string
   modelSlug?: Prisma.StringFilter<"AIModel"> | string
-  providerId?: Prisma.StringFilter<"AIModel"> | string
   priority?: Prisma.IntFilter<"AIModel"> | number
-  enabled?: Prisma.BoolFilter<"AIModel"> | boolean
+  isFree?: Prisma.BoolFilter<"AIModel"> | boolean
+  isActive?: Prisma.BoolFilter<"AIModel"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"AIModel"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AIModel"> | Date | string
   provider?: Prisma.XOR<Prisma.AIProviderScalarRelationFilter, Prisma.AIProviderWhereInput>
   messages?: Prisma.MessageListRelationFilter
   usages?: Prisma.UsageListRelationFilter
@@ -258,11 +288,14 @@ export type AIModelWhereUniqueInput = Prisma.AtLeast<{
 
 export type AIModelOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  providerId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   modelSlug?: Prisma.SortOrder
-  providerId?: Prisma.SortOrder
   priority?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  isFree?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.AIModelCountOrderByAggregateInput
   _avg?: Prisma.AIModelAvgOrderByAggregateInput
   _max?: Prisma.AIModelMaxOrderByAggregateInput
@@ -275,11 +308,14 @@ export type AIModelScalarWhereWithAggregatesInput = {
   OR?: Prisma.AIModelScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AIModelScalarWhereWithAggregatesInput | Prisma.AIModelScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"AIModel"> | string
+  providerId?: Prisma.StringWithAggregatesFilter<"AIModel"> | string
   name?: Prisma.StringWithAggregatesFilter<"AIModel"> | string
   modelSlug?: Prisma.StringWithAggregatesFilter<"AIModel"> | string
-  providerId?: Prisma.StringWithAggregatesFilter<"AIModel"> | string
   priority?: Prisma.IntWithAggregatesFilter<"AIModel"> | number
-  enabled?: Prisma.BoolWithAggregatesFilter<"AIModel"> | boolean
+  isFree?: Prisma.BoolWithAggregatesFilter<"AIModel"> | boolean
+  isActive?: Prisma.BoolWithAggregatesFilter<"AIModel"> | boolean
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"AIModel"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"AIModel"> | Date | string
 }
 
 export type AIModelCreateInput = {
@@ -287,7 +323,10 @@ export type AIModelCreateInput = {
   name: string
   modelSlug: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   provider: Prisma.AIProviderCreateNestedOneWithoutModelsInput
   messages?: Prisma.MessageCreateNestedManyWithoutModelInput
   usages?: Prisma.UsageCreateNestedManyWithoutModelInput
@@ -295,11 +334,14 @@ export type AIModelCreateInput = {
 
 export type AIModelUncheckedCreateInput = {
   id?: string
+  providerId: string
   name: string
   modelSlug: string
-  providerId: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutModelInput
   usages?: Prisma.UsageUncheckedCreateNestedManyWithoutModelInput
 }
@@ -309,7 +351,10 @@ export type AIModelUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.AIProviderUpdateOneRequiredWithoutModelsNestedInput
   messages?: Prisma.MessageUpdateManyWithoutModelNestedInput
   usages?: Prisma.UsageUpdateManyWithoutModelNestedInput
@@ -317,22 +362,28 @@ export type AIModelUpdateInput = {
 
 export type AIModelUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
-  providerId?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutModelNestedInput
   usages?: Prisma.UsageUncheckedUpdateManyWithoutModelNestedInput
 }
 
 export type AIModelCreateManyInput = {
   id?: string
+  providerId: string
   name: string
   modelSlug: string
-  providerId: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AIModelUpdateManyMutationInput = {
@@ -340,25 +391,34 @@ export type AIModelUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AIModelUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
-  providerId?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AIModelCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  providerId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   modelSlug?: Prisma.SortOrder
-  providerId?: Prisma.SortOrder
   priority?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  isFree?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AIModelAvgOrderByAggregateInput = {
@@ -367,20 +427,26 @@ export type AIModelAvgOrderByAggregateInput = {
 
 export type AIModelMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  providerId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   modelSlug?: Prisma.SortOrder
-  providerId?: Prisma.SortOrder
   priority?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  isFree?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AIModelMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  providerId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   modelSlug?: Prisma.SortOrder
-  providerId?: Prisma.SortOrder
   priority?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  isFree?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AIModelSumOrderByAggregateInput = {
@@ -421,6 +487,10 @@ export type IntFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type AIModelCreateNestedManyWithoutProviderInput = {
@@ -500,7 +570,10 @@ export type AIModelCreateWithoutProviderInput = {
   name: string
   modelSlug: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageCreateNestedManyWithoutModelInput
   usages?: Prisma.UsageCreateNestedManyWithoutModelInput
 }
@@ -510,7 +583,10 @@ export type AIModelUncheckedCreateWithoutProviderInput = {
   name: string
   modelSlug: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutModelInput
   usages?: Prisma.UsageUncheckedCreateNestedManyWithoutModelInput
 }
@@ -546,11 +622,14 @@ export type AIModelScalarWhereInput = {
   OR?: Prisma.AIModelScalarWhereInput[]
   NOT?: Prisma.AIModelScalarWhereInput | Prisma.AIModelScalarWhereInput[]
   id?: Prisma.StringFilter<"AIModel"> | string
+  providerId?: Prisma.StringFilter<"AIModel"> | string
   name?: Prisma.StringFilter<"AIModel"> | string
   modelSlug?: Prisma.StringFilter<"AIModel"> | string
-  providerId?: Prisma.StringFilter<"AIModel"> | string
   priority?: Prisma.IntFilter<"AIModel"> | number
-  enabled?: Prisma.BoolFilter<"AIModel"> | boolean
+  isFree?: Prisma.BoolFilter<"AIModel"> | boolean
+  isActive?: Prisma.BoolFilter<"AIModel"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"AIModel"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AIModel"> | Date | string
 }
 
 export type AIModelCreateWithoutMessagesInput = {
@@ -558,18 +637,24 @@ export type AIModelCreateWithoutMessagesInput = {
   name: string
   modelSlug: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   provider: Prisma.AIProviderCreateNestedOneWithoutModelsInput
   usages?: Prisma.UsageCreateNestedManyWithoutModelInput
 }
 
 export type AIModelUncheckedCreateWithoutMessagesInput = {
   id?: string
+  providerId: string
   name: string
   modelSlug: string
-  providerId: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   usages?: Prisma.UsageUncheckedCreateNestedManyWithoutModelInput
 }
 
@@ -594,18 +679,24 @@ export type AIModelUpdateWithoutMessagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.AIProviderUpdateOneRequiredWithoutModelsNestedInput
   usages?: Prisma.UsageUpdateManyWithoutModelNestedInput
 }
 
 export type AIModelUncheckedUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
-  providerId?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usages?: Prisma.UsageUncheckedUpdateManyWithoutModelNestedInput
 }
 
@@ -614,18 +705,24 @@ export type AIModelCreateWithoutUsagesInput = {
   name: string
   modelSlug: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   provider: Prisma.AIProviderCreateNestedOneWithoutModelsInput
   messages?: Prisma.MessageCreateNestedManyWithoutModelInput
 }
 
 export type AIModelUncheckedCreateWithoutUsagesInput = {
   id?: string
+  providerId: string
   name: string
   modelSlug: string
-  providerId: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutModelInput
 }
 
@@ -650,18 +747,24 @@ export type AIModelUpdateWithoutUsagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.AIProviderUpdateOneRequiredWithoutModelsNestedInput
   messages?: Prisma.MessageUpdateManyWithoutModelNestedInput
 }
 
 export type AIModelUncheckedUpdateWithoutUsagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
-  providerId?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutModelNestedInput
 }
 
@@ -670,7 +773,10 @@ export type AIModelCreateManyProviderInput = {
   name: string
   modelSlug: string
   priority: number
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AIModelUpdateWithoutProviderInput = {
@@ -678,7 +784,10 @@ export type AIModelUpdateWithoutProviderInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUpdateManyWithoutModelNestedInput
   usages?: Prisma.UsageUpdateManyWithoutModelNestedInput
 }
@@ -688,7 +797,10 @@ export type AIModelUncheckedUpdateWithoutProviderInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutModelNestedInput
   usages?: Prisma.UsageUncheckedUpdateManyWithoutModelNestedInput
 }
@@ -698,7 +810,10 @@ export type AIModelUncheckedUpdateManyWithoutProviderInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   modelSlug?: Prisma.StringFieldUpdateOperationsInput | string
   priority?: Prisma.IntFieldUpdateOperationsInput | number
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFree?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -743,11 +858,14 @@ export type AIModelCountOutputTypeCountUsagesArgs<ExtArgs extends runtime.Types.
 
 export type AIModelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  providerId?: boolean
   name?: boolean
   modelSlug?: boolean
-  providerId?: boolean
   priority?: boolean
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   provider?: boolean | Prisma.AIProviderDefaultArgs<ExtArgs>
   messages?: boolean | Prisma.AIModel$messagesArgs<ExtArgs>
   usages?: boolean | Prisma.AIModel$usagesArgs<ExtArgs>
@@ -756,34 +874,43 @@ export type AIModelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type AIModelSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  providerId?: boolean
   name?: boolean
   modelSlug?: boolean
-  providerId?: boolean
   priority?: boolean
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   provider?: boolean | Prisma.AIProviderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["aIModel"]>
 
 export type AIModelSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  providerId?: boolean
   name?: boolean
   modelSlug?: boolean
-  providerId?: boolean
   priority?: boolean
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   provider?: boolean | Prisma.AIProviderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["aIModel"]>
 
 export type AIModelSelectScalar = {
   id?: boolean
+  providerId?: boolean
   name?: boolean
   modelSlug?: boolean
-  providerId?: boolean
   priority?: boolean
-  enabled?: boolean
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type AIModelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "modelSlug" | "providerId" | "priority" | "enabled", ExtArgs["result"]["aIModel"]>
+export type AIModelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "providerId" | "name" | "modelSlug" | "priority" | "isFree" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["aIModel"]>
 export type AIModelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   provider?: boolean | Prisma.AIProviderDefaultArgs<ExtArgs>
   messages?: boolean | Prisma.AIModel$messagesArgs<ExtArgs>
@@ -806,11 +933,14 @@ export type $AIModelPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    providerId: string
     name: string
     modelSlug: string
-    providerId: string
     priority: number
-    enabled: boolean
+    isFree: boolean
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["aIModel"]>
   composites: {}
 }
@@ -1238,11 +1368,14 @@ export interface Prisma__AIModelClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface AIModelFieldRefs {
   readonly id: Prisma.FieldRef<"AIModel", 'String'>
+  readonly providerId: Prisma.FieldRef<"AIModel", 'String'>
   readonly name: Prisma.FieldRef<"AIModel", 'String'>
   readonly modelSlug: Prisma.FieldRef<"AIModel", 'String'>
-  readonly providerId: Prisma.FieldRef<"AIModel", 'String'>
   readonly priority: Prisma.FieldRef<"AIModel", 'Int'>
-  readonly enabled: Prisma.FieldRef<"AIModel", 'Boolean'>
+  readonly isFree: Prisma.FieldRef<"AIModel", 'Boolean'>
+  readonly isActive: Prisma.FieldRef<"AIModel", 'Boolean'>
+  readonly createdAt: Prisma.FieldRef<"AIModel", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"AIModel", 'DateTime'>
 }
     
 

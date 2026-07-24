@@ -8,10 +8,10 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/AIModel.js'
-export type * from './models/AIProvider.js'
-export type * from './models/Conversation.js'
-export type * from './models/Message.js'
-export type * from './models/Usage.js'
-export type * from './models/User.js'
-export type * from './commonInputTypes.js'
+export type * from './models/AIModel'
+export type * from './models/AIProvider'
+export type * from './models/Conversation'
+export type * from './models/Message'
+export type * from './models/Usage'
+export type * from './models/User'
+export type * from './commonInputTypes'

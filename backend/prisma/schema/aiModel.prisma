@@ -1,14 +1,20 @@
 model AIModel {
-  id         String @id @default(cuid())
-  name       String
-  modelSlug  String
+  id String @id @default(cuid())
+
   providerId String
+  provider   AIProvider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  name      String
+  modelSlug String
 
   priority Int
-  enabled  Boolean @default(true)
 
-  provider AIProvider @relation(fields: [providerId], references: [id])
+  isFree   Boolean @default(true)
+  isActive Boolean @default(true)
 
   messages Message[]
   usages   Usage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

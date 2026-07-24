@@ -1,11 +1,13 @@
 model AIProvider {
-    id      String  @id @default(cuid())
-    name    String
-    baseUrl String
-    apiKey  String
-    enabled Boolean @default(true)
+    id String @id @default(cuid())
 
-    createdAt DateTime @default(now())
+    name    String  @unique
+    baseUrl String?
+
+    isActive Boolean @default(true)
 
     models AIModel[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

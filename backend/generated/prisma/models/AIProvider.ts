@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums"
+import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model AIProvider
@@ -28,27 +28,27 @@ export type AIProviderMinAggregateOutputType = {
   id: string | null
   name: string | null
   baseUrl: string | null
-  apiKey: string | null
-  enabled: boolean | null
+  isActive: boolean | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AIProviderMaxAggregateOutputType = {
   id: string | null
   name: string | null
   baseUrl: string | null
-  apiKey: string | null
-  enabled: boolean | null
+  isActive: boolean | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AIProviderCountAggregateOutputType = {
   id: number
   name: number
   baseUrl: number
-  apiKey: number
-  enabled: number
+  isActive: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -57,27 +57,27 @@ export type AIProviderMinAggregateInputType = {
   id?: true
   name?: true
   baseUrl?: true
-  apiKey?: true
-  enabled?: true
+  isActive?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type AIProviderMaxAggregateInputType = {
   id?: true
   name?: true
   baseUrl?: true
-  apiKey?: true
-  enabled?: true
+  isActive?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type AIProviderCountAggregateInputType = {
   id?: true
   name?: true
   baseUrl?: true
-  apiKey?: true
-  enabled?: true
+  isActive?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -156,10 +156,10 @@ export type AIProviderGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type AIProviderGroupByOutputType = {
   id: string
   name: string
-  baseUrl: string
-  apiKey: string
-  enabled: boolean
+  baseUrl: string | null
+  isActive: boolean
   createdAt: Date
+  updatedAt: Date
   _count: AIProviderCountAggregateOutputType | null
   _min: AIProviderMinAggregateOutputType | null
   _max: AIProviderMaxAggregateOutputType | null
@@ -186,43 +186,43 @@ export type AIProviderWhereInput = {
   NOT?: Prisma.AIProviderWhereInput | Prisma.AIProviderWhereInput[]
   id?: Prisma.StringFilter<"AIProvider"> | string
   name?: Prisma.StringFilter<"AIProvider"> | string
-  baseUrl?: Prisma.StringFilter<"AIProvider"> | string
-  apiKey?: Prisma.StringFilter<"AIProvider"> | string
-  enabled?: Prisma.BoolFilter<"AIProvider"> | boolean
+  baseUrl?: Prisma.StringNullableFilter<"AIProvider"> | string | null
+  isActive?: Prisma.BoolFilter<"AIProvider"> | boolean
   createdAt?: Prisma.DateTimeFilter<"AIProvider"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AIProvider"> | Date | string
   models?: Prisma.AIModelListRelationFilter
 }
 
 export type AIProviderOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  baseUrl?: Prisma.SortOrder
-  apiKey?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  baseUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   models?: Prisma.AIModelOrderByRelationAggregateInput
 }
 
 export type AIProviderWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   AND?: Prisma.AIProviderWhereInput | Prisma.AIProviderWhereInput[]
   OR?: Prisma.AIProviderWhereInput[]
   NOT?: Prisma.AIProviderWhereInput | Prisma.AIProviderWhereInput[]
-  name?: Prisma.StringFilter<"AIProvider"> | string
-  baseUrl?: Prisma.StringFilter<"AIProvider"> | string
-  apiKey?: Prisma.StringFilter<"AIProvider"> | string
-  enabled?: Prisma.BoolFilter<"AIProvider"> | boolean
+  baseUrl?: Prisma.StringNullableFilter<"AIProvider"> | string | null
+  isActive?: Prisma.BoolFilter<"AIProvider"> | boolean
   createdAt?: Prisma.DateTimeFilter<"AIProvider"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"AIProvider"> | Date | string
   models?: Prisma.AIModelListRelationFilter
-}, "id">
+}, "id" | "name">
 
 export type AIProviderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  baseUrl?: Prisma.SortOrder
-  apiKey?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  baseUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.AIProviderCountOrderByAggregateInput
   _max?: Prisma.AIProviderMaxOrderByAggregateInput
   _min?: Prisma.AIProviderMinOrderByAggregateInput
@@ -234,77 +234,77 @@ export type AIProviderScalarWhereWithAggregatesInput = {
   NOT?: Prisma.AIProviderScalarWhereWithAggregatesInput | Prisma.AIProviderScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"AIProvider"> | string
   name?: Prisma.StringWithAggregatesFilter<"AIProvider"> | string
-  baseUrl?: Prisma.StringWithAggregatesFilter<"AIProvider"> | string
-  apiKey?: Prisma.StringWithAggregatesFilter<"AIProvider"> | string
-  enabled?: Prisma.BoolWithAggregatesFilter<"AIProvider"> | boolean
+  baseUrl?: Prisma.StringNullableWithAggregatesFilter<"AIProvider"> | string | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"AIProvider"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"AIProvider"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"AIProvider"> | Date | string
 }
 
 export type AIProviderCreateInput = {
   id?: string
   name: string
-  baseUrl: string
-  apiKey: string
-  enabled?: boolean
+  baseUrl?: string | null
+  isActive?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   models?: Prisma.AIModelCreateNestedManyWithoutProviderInput
 }
 
 export type AIProviderUncheckedCreateInput = {
   id?: string
   name: string
-  baseUrl: string
-  apiKey: string
-  enabled?: boolean
+  baseUrl?: string | null
+  isActive?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
   models?: Prisma.AIModelUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type AIProviderUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  baseUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  apiKey?: Prisma.StringFieldUpdateOperationsInput | string
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  baseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   models?: Prisma.AIModelUpdateManyWithoutProviderNestedInput
 }
 
 export type AIProviderUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  baseUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  apiKey?: Prisma.StringFieldUpdateOperationsInput | string
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  baseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   models?: Prisma.AIModelUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type AIProviderCreateManyInput = {
   id?: string
   name: string
-  baseUrl: string
-  apiKey: string
-  enabled?: boolean
+  baseUrl?: string | null
+  isActive?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AIProviderUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  baseUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  apiKey?: Prisma.StringFieldUpdateOperationsInput | string
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  baseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AIProviderUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  baseUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  apiKey?: Prisma.StringFieldUpdateOperationsInput | string
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  baseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AIProviderScalarRelationFilter = {
@@ -316,27 +316,27 @@ export type AIProviderCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   baseUrl?: Prisma.SortOrder
-  apiKey?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AIProviderMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   baseUrl?: Prisma.SortOrder
-  apiKey?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AIProviderMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   baseUrl?: Prisma.SortOrder
-  apiKey?: Prisma.SortOrder
-  enabled?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type AIProviderCreateNestedOneWithoutModelsInput = {
@@ -353,26 +353,26 @@ export type AIProviderUpdateOneRequiredWithoutModelsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AIProviderUpdateToOneWithWhereWithoutModelsInput, Prisma.AIProviderUpdateWithoutModelsInput>, Prisma.AIProviderUncheckedUpdateWithoutModelsInput>
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type AIProviderCreateWithoutModelsInput = {
   id?: string
   name: string
-  baseUrl: string
-  apiKey: string
-  enabled?: boolean
+  baseUrl?: string | null
+  isActive?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AIProviderUncheckedCreateWithoutModelsInput = {
   id?: string
   name: string
-  baseUrl: string
-  apiKey: string
-  enabled?: boolean
+  baseUrl?: string | null
+  isActive?: boolean
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type AIProviderCreateOrConnectWithoutModelsInput = {
@@ -394,19 +394,19 @@ export type AIProviderUpdateToOneWithWhereWithoutModelsInput = {
 export type AIProviderUpdateWithoutModelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  baseUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  apiKey?: Prisma.StringFieldUpdateOperationsInput | string
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  baseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AIProviderUncheckedUpdateWithoutModelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  baseUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  apiKey?: Prisma.StringFieldUpdateOperationsInput | string
-  enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  baseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -444,9 +444,9 @@ export type AIProviderSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   name?: boolean
   baseUrl?: boolean
-  apiKey?: boolean
-  enabled?: boolean
+  isActive?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   models?: boolean | Prisma.AIProvider$modelsArgs<ExtArgs>
   _count?: boolean | Prisma.AIProviderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["aIProvider"]>
@@ -455,30 +455,30 @@ export type AIProviderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   name?: boolean
   baseUrl?: boolean
-  apiKey?: boolean
-  enabled?: boolean
+  isActive?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["aIProvider"]>
 
 export type AIProviderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   baseUrl?: boolean
-  apiKey?: boolean
-  enabled?: boolean
+  isActive?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["aIProvider"]>
 
 export type AIProviderSelectScalar = {
   id?: boolean
   name?: boolean
   baseUrl?: boolean
-  apiKey?: boolean
-  enabled?: boolean
+  isActive?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type AIProviderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "baseUrl" | "apiKey" | "enabled" | "createdAt", ExtArgs["result"]["aIProvider"]>
+export type AIProviderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "baseUrl" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["aIProvider"]>
 export type AIProviderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   models?: boolean | Prisma.AIProvider$modelsArgs<ExtArgs>
   _count?: boolean | Prisma.AIProviderCountOutputTypeDefaultArgs<ExtArgs>
@@ -494,10 +494,10 @@ export type $AIProviderPayload<ExtArgs extends runtime.Types.Extensions.Internal
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    baseUrl: string
-    apiKey: string
-    enabled: boolean
+    baseUrl: string | null
+    isActive: boolean
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["aIProvider"]>
   composites: {}
 }
@@ -925,9 +925,9 @@ export interface AIProviderFieldRefs {
   readonly id: Prisma.FieldRef<"AIProvider", 'String'>
   readonly name: Prisma.FieldRef<"AIProvider", 'String'>
   readonly baseUrl: Prisma.FieldRef<"AIProvider", 'String'>
-  readonly apiKey: Prisma.FieldRef<"AIProvider", 'String'>
-  readonly enabled: Prisma.FieldRef<"AIProvider", 'Boolean'>
+  readonly isActive: Prisma.FieldRef<"AIProvider", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"AIProvider", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"AIProvider", 'DateTime'>
 }
     
 
