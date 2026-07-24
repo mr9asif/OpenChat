@@ -102,8 +102,9 @@ const refreshToken = async (refreshToken: string) => {
 
   return { accessToken };
 };
-const logout = () => {};
-
+const logout = async () => {
+  return null;
+};
 export const authService = {
   login,
   register,

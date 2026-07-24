@@ -66,8 +66,31 @@ const refreshToken = catchAsync(
     });
   },
 );
+
+const logout = catchAsync(async (req, res) => {
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
+
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Logout successful",
+    data: null,
+  });
+});
+
 export const authController = {
   register,
   loginUser,
   refreshToken,
+  logout,
 };
