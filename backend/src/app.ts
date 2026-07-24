@@ -1,6 +1,7 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
+import { aiProviderRoute } from "./modules/aiProvider/aiProvider.route";
 import { AuthRouter } from "./modules/auth/auth.route";
 import { UserRoute } from "./modules/user/user.route";
 
@@ -15,5 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 // api
 app.use("/api/auth", AuthRouter);
 app.use("/api/user", UserRoute);
+app.use("/api/provider", aiProviderRoute);
 
 export default app;

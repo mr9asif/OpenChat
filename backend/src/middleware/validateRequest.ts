@@ -4,6 +4,7 @@ import { ZodType } from "zod";
 export const validateRequest =
   <T>(schema: ZodType<T>) =>
   (req: Request, res: Response, next: NextFunction) => {
+    console.log("Body:", req.body);
     const result = schema.safeParse({
       body: req.body,
       params: req.params,
