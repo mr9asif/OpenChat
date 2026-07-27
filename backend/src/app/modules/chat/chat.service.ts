@@ -1,12 +1,28 @@
+import { prisma } from "../../../../lib/prisma";
 import { AIMessage } from "../../ai/types";
 import { ProviderFactory } from "../../provider/ProviderFactory";
 
 const sendMessage = async (message: string) => {
-  // পরে Database থেকে আসবে
-  const providerName = "Gemini";
-  const model = "gemini-2.5-flash";
+  const aiModel = await prisma.aIModel.findFirst({
+    where: {
+      isActive: true,
+      provider: {
+        isActive: true,
+      },
+    },
+    include: {
+      provider: true,
+    },
+    orderBy: {
+      priority: "asc",
+    },
+  });
 
-  const provider = ProviderFactory.create(providerName);
+  if (!aiModel) {
+    throw new Error("No active AI model found");
+  }
+
+  const provider = ProviderFactory.create(aiModel.provider.name);
 
   const messages: AIMessage[] = [
     {
@@ -16,9 +32,10 @@ const sendMessage = async (message: string) => {
   ];
 
   const response = await provider.generateResponse({
-    model,
+    model: aiModel.modelSlug,
     messages,
   });
+  console.log("Model:", aiModel.modelSlug);
 
   return response;
 };

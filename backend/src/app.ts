@@ -20,6 +20,6 @@ app.use("/api/auth", AuthRouter);
 app.use("/api/user", UserRoute);
 app.use("/api/provider", aiProviderRoute);
 app.use("/api/model", aiModelRoutes);
-app.use("api/chat", chatRoutes);
+app.use("/api/chat", chatRoutes);
 
 export default app;
