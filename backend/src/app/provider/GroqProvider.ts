@@ -1,7 +1,9 @@
 import OpenAI from "openai";
 import config from "../../config";
+import { GenerateResponseInput, GenerateResponseOutput } from "../ai/types";
+import { AIProvider } from "./AIProvider";
 
-export class GroqProvider {
+export class GroqProvider implements AIProvider {
   private client: OpenAI;
 
   constructor() {
@@ -11,20 +13,21 @@ export class GroqProvider {
     });
   }
 
-  async generateResponse(model: string, message: string) {
+  async generateResponse(
+    input: GenerateResponseInput,
+  ): Promise<GenerateResponseOutput> {
+    console.log("🚀 GroqProvider reached");
+
     const response = await this.client.chat.completions.create({
-      model,
-      messages: [
-        {
-          role: "user",
-          content: message,
-        },
-      ],
+      model: input.model,
+      messages: input.messages.map((msg) => ({
+        role: msg.role.toLowerCase() as "user" | "assistant" | "system",
+        content: msg.content,
+      })),
     });
 
     return {
-      content: response.choices[0]?.message?.content ?? "",
-      usage: response.usage,
+      text: response.choices[0]?.message?.content ?? "",
     };
   }
 }
