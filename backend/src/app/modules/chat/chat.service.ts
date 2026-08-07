@@ -1,18 +1,97 @@
+import { MessageRole } from "../../../../generated/prisma/enums";
 import { prisma } from "../../../../lib/prisma";
 import { AIMessage } from "../../ai/types";
 import { ProviderFactory } from "../../provider/ProviderFactory";
 import { SendMessagePayload } from "./chat.types";
 
+// create conversation
+const getOrCreateConversation = async (
+  userId: string,
+  conversationId?: string,
+) => {
+  if (conversationId) {
+    const conversation = await prisma.conversation.findUnique({
+      where: {
+        id: conversationId,
+        userId,
+      },
+    });
+
+    if (!conversation) {
+      throw new Error("Conversation not found");
+    }
+
+    return conversation;
+  }
+
+  return prisma.conversation.create({
+    data: {
+      title: "New Chat",
+      userId,
+    },
+  });
+};
+
+// save user messages...
+
+const saveUserMessage = async (conversationId: string, content: string) => {
+  return prisma.message.create({
+    data: {
+      conversationId,
+      role: MessageRole.USER,
+      content,
+    },
+  });
+};
+
+// load conversation messages
+
+const loadConversationMessages = async (
+  conversationId: string,
+): Promise<AIMessage[]> => {
+  const messages = await prisma.message.findMany({
+    where: {
+      conversationId,
+    },
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
+
+  return messages.map((message) => ({
+    role: message.role,
+    content: message.content,
+  }));
+};
+
+const saveAssistantMessage = async (
+  conversationId: string,
+  content: string,
+  modelId?: string,
+) => {
+  return prisma.message.create({
+    data: {
+      conversationId,
+      role: MessageRole.ASSISTANT,
+      content,
+      modelId,
+    },
+  });
+};
+
 const sendMessage = async (payload: SendMessagePayload) => {
-  const { message, modelId } = payload;
+  const { userId, message, modelId, conversationId } = payload;
+
   console.log("🔥 NEW CHAT SERVICE RUNNING");
 
-  const messages: AIMessage[] = [
-    {
-      role: "USER",
-      content: message,
-    },
-  ];
+  // Get or Create Conversation
+  const conversation = await getOrCreateConversation(userId, conversationId);
+
+  // Save User Message
+  await saveUserMessage(conversation.id, message);
+
+  // Load Full Conversation History
+  const messages = await loadConversationMessages(conversation.id);
 
   /**
    * ==================================================
@@ -43,15 +122,20 @@ const sendMessage = async (payload: SendMessagePayload) => {
       model: selectedModel.modelSlug,
       messages,
     });
-
+    await saveAssistantMessage(
+      conversation.id,
+      response.text,
+      selectedModel.id,
+    );
     return {
+      conversationId: conversation.id,
       provider: selectedModel.provider.name,
       model: {
         id: selectedModel.id,
         name: selectedModel.name,
         slug: selectedModel.modelSlug,
       },
-      message: response,
+      message: response.text,
     };
   }
 
@@ -90,7 +174,10 @@ const sendMessage = async (payload: SendMessagePayload) => {
         messages,
       });
 
+      await saveAssistantMessage(conversation.id, response.text, model.id);
+
       return {
+        conversationId: conversation.id,
         provider: model.provider.name,
         model: {
           id: model.id,

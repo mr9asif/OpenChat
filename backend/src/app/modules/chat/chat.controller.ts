@@ -1,9 +1,14 @@
+import { Response } from "express";
+import { AuthRequest } from "../../../middleware/auth";
 import { catchAsync } from "../../../utils/catchAsync";
 import { sendResponse } from "../../../utils/sendResponse";
 import { chatService } from "./chat.service";
 
-const sendMessage = catchAsync(async (req, res) => {
-  const result = await chatService.sendMessage(req.body);
+const sendMessage = catchAsync(async (req: AuthRequest, res: Response) => {
+  const result = await chatService.sendMessage({
+    userId: req.user!.id,
+    ...req.body,
+  });
 
   sendResponse(res, {
     statusCode: 200,

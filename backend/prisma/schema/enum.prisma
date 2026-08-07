@@ -4,7 +4,7 @@ enum Role {
 }
 
 enum MessageRole {
-    ASSISTENT
+    ASSISTANT
     USER
     SYSTEM
 }
