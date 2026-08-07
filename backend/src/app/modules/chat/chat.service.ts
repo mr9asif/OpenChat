@@ -1,6 +1,5 @@
 import { prisma } from "../../../../lib/prisma";
-import { AIMessage } from "../../ai/types";
-import { ProviderFactory } from "../../provider/ProviderFactory";
+import { GroqProvider } from "../../provider/GroqProvider";
 
 const sendMessage = async (message: string) => {
   const aiModel = await prisma.aIModel.findFirst({
@@ -22,22 +21,31 @@ const sendMessage = async (message: string) => {
     throw new Error("No active AI model found");
   }
 
-  const provider = ProviderFactory.create(aiModel.provider.name);
+  // const provider = ProviderFactory.create(aiModel.provider.name);
 
-  const messages: AIMessage[] = [
-    {
-      role: "USER",
-      content: message,
-    },
-  ];
+  // const messages: AIMessage[] = [
+  //   {
+  //     role: "USER",
+  //     content: message,
+  //   },
+  // ];
 
-  const response = await provider.generateResponse({
-    model: aiModel.modelSlug,
-    messages,
-  });
+  // const response = await provider.generateResponse({
+  //   model: aiModel.modelSlug,
+  //   messages,
+  // });
   console.log("Model:", aiModel.modelSlug);
 
-  return response;
+  const provider = new GroqProvider();
+
+  const result = await provider.generateResponse(
+    "llama-3.1-8b-instant",
+    message,
+  );
+
+  console.log(result);
+  return result;
+  // return response;
 };
 
 export const chatService = {
