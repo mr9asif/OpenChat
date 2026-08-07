@@ -29,7 +29,34 @@ const getAvailableModels = catchAsync(async (req, res) => {
   });
 });
 
+const getConversations = catchAsync(async (req: AuthRequest, res) => {
+  const result = await chatService.getConversations(req.user!.id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Conversations fetched successfully",
+    data: result,
+  });
+});
+
+const getConversationMessages = catchAsync(async (req: AuthRequest, res) => {
+  const result = await chatService.getConversationMessages(
+    req.params.id as string,
+    req.user!.id,
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Conversation fetched successfully",
+    data: result,
+  });
+});
+
 export const chatController = {
   sendMessage,
   getAvailableModels,
+  getConversations,
+  getConversationMessages,
 };

@@ -224,7 +224,62 @@ const getAvailableModels = async () => {
   }));
 };
 
+// get conversations
+const getConversations = async (userId: string) => {
+  const conversations = await prisma.conversation.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  return conversations;
+};
+
+// getCoversation messages
+const getConversationMessages = async (
+  conversationId: string,
+  userId: string,
+) => {
+  const conversation = await prisma.conversation.findFirst({
+    where: {
+      id: conversationId,
+      userId,
+    },
+    include: {
+      messages: {
+        orderBy: {
+          createdAt: "asc",
+        },
+        select: {
+          id: true,
+          role: true,
+          content: true,
+          createdAt: true,
+          modelId: true,
+        },
+      },
+    },
+  });
+
+  if (!conversation) {
+    throw new Error("Conversation not found");
+  }
+
+  return conversation;
+};
+
 export const chatService = {
   sendMessage,
   getAvailableModels,
+  getConversations,
+  getConversationMessages,
 };

@@ -16,4 +16,12 @@ router.post(
 
 router.get("/models", chatController.getAvailableModels);
 
+router.get("/conversations", auth(), chatController.getConversations);
+
+router.get(
+  "/conversations/:id/messages",
+  auth(),
+  chatController.getConversationMessages,
+);
+
 export const chatRoutes = router;
