@@ -54,9 +54,22 @@ const getConversationMessages = catchAsync(async (req: AuthRequest, res) => {
   });
 });
 
+const deleteConversation = catchAsync(
+  async (req: AuthRequest, res: Response) => {
+    await chatService.deleteConversation(req.params.id as string, req.user!.id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Conversation deleted successfully",
+      data: null,
+    });
+  },
+);
 export const chatController = {
   sendMessage,
   getAvailableModels,
   getConversations,
   getConversationMessages,
+  deleteConversation,
 };

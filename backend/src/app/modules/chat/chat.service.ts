@@ -277,9 +277,33 @@ const getConversationMessages = async (
   return conversation;
 };
 
+const deleteConversation = async (conversationId: string, userId: string) => {
+  // Check ownership
+  const conversation = await prisma.conversation.findFirst({
+    where: {
+      id: conversationId,
+      userId,
+    },
+  });
+
+  if (!conversation) {
+    throw new Error("Conversation not found");
+  }
+
+  // Delete Conversation
+  await prisma.conversation.delete({
+    where: {
+      id: conversationId,
+    },
+  });
+
+  return null;
+};
+
 export const chatService = {
   sendMessage,
   getAvailableModels,
   getConversations,
   getConversationMessages,
+  deleteConversation,
 };

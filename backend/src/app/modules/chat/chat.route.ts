@@ -23,5 +23,6 @@ router.get(
   auth(),
   chatController.getConversationMessages,
 );
+router.delete("/conversations/:id", auth(), chatController.deleteConversation);
 
 export const chatRoutes = router;
