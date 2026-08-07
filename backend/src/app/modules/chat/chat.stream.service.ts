@@ -11,6 +11,7 @@ import {
   saveUserMessage,
 } from "./chat.helpers";
 
+import { generateConversationTitle } from "./chat.tilte.service";
 import { SendMessagePayload } from "./chat.types";
 
 const streamMessage = async (payload: SendMessagePayload, res: Response) => {
@@ -88,6 +89,15 @@ const streamMessage = async (payload: SendMessagePayload, res: Response) => {
 
   // 8. Save Assistant Message
   await saveAssistantMessage(conversation.id, fullResponse, selectedModel.id);
+
+  if (conversation.title === "New Chat") {
+    generateConversationTitle(
+      conversation.id,
+      selectedModel.modelSlug,
+      selectedModel.provider.name,
+      message,
+    ).catch(console.error);
+  }
 
   // 9. Save Usage
   // (Streaming token usage পরে add করব)

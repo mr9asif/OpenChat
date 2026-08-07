@@ -7,6 +7,7 @@ import {
   saveUsage,
   saveUserMessage,
 } from "./chat.helpers";
+import { generateConversationTitle } from "./chat.tilte.service";
 import { SendMessagePayload } from "./chat.types";
 
 const sendMessage = async (payload: SendMessagePayload) => {
@@ -59,6 +60,15 @@ const sendMessage = async (payload: SendMessagePayload) => {
       response.text,
       selectedModel.id,
     );
+
+    if (conversation.title === "New Chat") {
+      generateConversationTitle(
+        conversation.id,
+        selectedModel.modelSlug,
+        selectedModel.provider.name,
+        message,
+      ).catch(console.error);
+    }
     return {
       conversationId: conversation.id,
       provider: selectedModel.provider.name,
@@ -108,6 +118,14 @@ const sendMessage = async (payload: SendMessagePayload) => {
       await saveUsage(userId, conversation.id, model.id, response);
 
       await saveAssistantMessage(conversation.id, response.text, model.id);
+      if (conversation.title === "New Chat") {
+        generateConversationTitle(
+          conversation.id,
+          model.modelSlug,
+          model.provider.name,
+          message,
+        ).catch(console.error);
+      }
 
       return {
         conversationId: conversation.id,
