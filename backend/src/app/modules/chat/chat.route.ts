@@ -3,6 +3,7 @@ import { chatController } from "./chat.controller";
 
 import { auth } from "../../../middleware/auth";
 import { validateRequest } from "../../../middleware/validateRequest";
+import { chatStreamController } from "./chat.stream.controller";
 import { chatValidation } from "./chat.validation";
 
 const router = express.Router();
@@ -24,5 +25,7 @@ router.get(
   chatController.getConversationMessages,
 );
 router.delete("/conversations/:id", auth(), chatController.deleteConversation);
+
+router.post("/stream", auth(), chatStreamController.streamMessage);
 
 export const chatRoutes = router;
