@@ -5,5 +5,5 @@ export interface AIProvider {
     input: GenerateResponseInput,
   ): Promise<GenerateResponseOutput>;
 
-  streamResponse?(input: GenerateResponseInput): Promise<AsyncIterable<any>>;
+  streamResponse(input: GenerateResponseInput): AsyncIterable<string>;
 }

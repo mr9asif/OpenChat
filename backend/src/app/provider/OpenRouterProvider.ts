@@ -36,4 +36,28 @@ export class OpenRouterProvider implements AIProvider {
       totalTokens: completion.usage?.total_tokens ?? 0,
     };
   }
+
+  async *streamResponse(input: GenerateResponseInput): AsyncIterable<string> {
+    console.log("🚀 OpenRouter Streaming Started");
+
+    const stream = await this.client.chat.completions.create({
+      model: input.model,
+
+      messages: input.messages.map((msg) => ({
+        role: msg.role.toLowerCase() as "user" | "assistant" | "system",
+
+        content: msg.content,
+      })),
+
+      stream: true,
+    });
+
+    for await (const chunk of stream) {
+      const content = chunk.choices[0]?.delta?.content;
+
+      if (content) {
+        yield content;
+      }
+    }
+  }
 }
