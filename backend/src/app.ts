@@ -1,6 +1,7 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
+import { adminRoutes } from "./app/admin/admin.route";
 import { chatRoutes } from "./app/modules/chat/chat.route";
 import { aiModelRoutes } from "./modules/aiModel/aiModel.route";
 import { aiProviderRoute } from "./modules/aiProvider/aiProvider.route";
@@ -21,5 +22,6 @@ app.use("/api/user", UserRoute);
 app.use("/api/provider", aiProviderRoute);
 app.use("/api/model", aiModelRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/admin", adminRoutes);
 
 export default app;
