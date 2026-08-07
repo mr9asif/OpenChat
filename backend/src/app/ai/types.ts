@@ -16,4 +16,8 @@ export interface GenerateResponseInput {
 
 export interface GenerateResponseOutput {
   text: string;
+
+  promptTokens?: number;
+  completionTokens?: number;
+  totalTokens?: number;
 }

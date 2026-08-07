@@ -18,7 +18,7 @@ export class OpenRouterProvider implements AIProvider {
   ): Promise<GenerateResponseOutput> {
     console.log("🚀 OpenRouterProvider reached");
 
-    const response = await this.client.chat.completions.create({
+    const completion = await this.client.chat.completions.create({
       model: input.model,
       messages: input.messages.map((msg) => ({
         role: msg.role.toLowerCase() as "user" | "assistant" | "system",
@@ -27,7 +27,13 @@ export class OpenRouterProvider implements AIProvider {
     });
 
     return {
-      text: response.choices[0]?.message?.content ?? "",
+      text: completion.choices[0]?.message?.content ?? "",
+
+      promptTokens: completion.usage?.prompt_tokens ?? 0,
+
+      completionTokens: completion.usage?.completion_tokens ?? 0,
+
+      totalTokens: completion.usage?.total_tokens ?? 0,
     };
   }
 }

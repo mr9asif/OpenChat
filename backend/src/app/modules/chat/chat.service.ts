@@ -1,6 +1,6 @@
 import { MessageRole } from "../../../../generated/prisma/enums";
 import { prisma } from "../../../../lib/prisma";
-import { AIMessage } from "../../ai/types";
+import { AIMessage, GenerateResponseOutput } from "../../ai/types";
 import { ProviderFactory } from "../../provider/ProviderFactory";
 import { SendMessagePayload } from "./chat.types";
 
@@ -122,6 +122,8 @@ const sendMessage = async (payload: SendMessagePayload) => {
       model: selectedModel.modelSlug,
       messages,
     });
+
+    await saveUsage(userId, conversation.id, selectedModel.id, response);
     await saveAssistantMessage(
       conversation.id,
       response.text,
@@ -173,6 +175,7 @@ const sendMessage = async (payload: SendMessagePayload) => {
         model: model.modelSlug,
         messages,
       });
+      await saveUsage(userId, conversation.id, model.id, response);
 
       await saveAssistantMessage(conversation.id, response.text, model.id);
 
@@ -298,6 +301,26 @@ const deleteConversation = async (conversationId: string, userId: string) => {
   });
 
   return null;
+};
+
+// usage
+const saveUsage = async (
+  userId: string,
+  conversationId: string,
+  modelId: string,
+  response: GenerateResponseOutput,
+) => {
+  await prisma.usage.create({
+    data: {
+      userId,
+      conversationId,
+      modelId,
+
+      promptTokens: response.promptTokens ?? 0,
+      completionTokens: response.completionTokens ?? 0,
+      totalTokens: response.totalTokens ?? 0,
+    },
+  });
 };
 
 export const chatService = {
