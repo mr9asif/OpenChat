@@ -27,5 +27,6 @@ router.get(
 router.delete("/conversations/:id", auth(), chatController.deleteConversation);
 
 router.post("/stream", auth(), chatStreamController.streamMessage);
+router.get("/usage", auth(), chatController.getUsage);
 
 export const chatRoutes = router;

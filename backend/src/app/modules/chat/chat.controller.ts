@@ -3,6 +3,7 @@ import { AuthRequest } from "../../../middleware/auth";
 import { catchAsync } from "../../../utils/catchAsync";
 import { sendResponse } from "../../../utils/sendResponse";
 import { chatService } from "./chat.service";
+import { chatUsageService } from "./chat.usage.service";
 
 const sendMessage = catchAsync(async (req: AuthRequest, res: Response) => {
   const result = await chatService.sendMessage({
@@ -66,10 +67,26 @@ const deleteConversation = catchAsync(
     });
   },
 );
+
+// get usage
+const getUsage = catchAsync(async (req: AuthRequest, res: Response) => {
+  console.log("🔥 GET USAGE CONTROLLER");
+
+  const result = await chatUsageService.getUsage(req.user!.id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Usage fetched successfully",
+    data: result,
+  });
+});
+
 export const chatController = {
   sendMessage,
   getAvailableModels,
   getConversations,
   getConversationMessages,
   deleteConversation,
+  getUsage,
 };
