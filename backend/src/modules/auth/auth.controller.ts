@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
+import config from "../../config";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { authService } from "./auth.service";
@@ -88,9 +89,29 @@ const logout = catchAsync(async (req, res) => {
   });
 });
 
+const googleLogin = catchAsync(async (req, res) => {
+  const { token } = req.body;
+
+  const result = await authService.loginWithGoogle(token);
+
+  res.cookie("refreshToken", result.refreshToken, {
+    httpOnly: true,
+    secure: config.node_env === "production",
+  });
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Google login successful",
+    data: {
+      accessToken: result.accessToken,
+    },
+  });
+});
 export const authController = {
   register,
   loginUser,
   refreshToken,
   logout,
+  googleLogin,
 };
